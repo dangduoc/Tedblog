@@ -170,6 +170,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
     <Content Include="Content\ckeditor\adapters\jquery.js" />
     <Content Include="Content\ckeditor\build-config.js" />
     <Content Include="Content\ckeditor\ckeditor.js" />
@@ -455,6 +456,7 @@
     <Content Include="Content\images\skype.png" />
     <Content Include="Content\images\steam.jpg" />
     <Content Include="Content\images\twitter.png" />
+    <Content Include="Content\images\uu.jpg" />
     <Content Include="Content\images\youtube.png" />
     <Content Include="Content\layoutStyle.css" />
     <Content Include="Content\lightslider.css" />
@@ -561,7 +563,7 @@
     <Content Include="Areas\Admin\Views\Trip\PreviewTrip.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Register\Index.cshtml" />
-    <None Include="Properties\PublishProfiles\dangduoc - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\duocdang - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -624,6 +626,7 @@
     <Compile Include="Common\Methods.cs" />
     <Compile Include="Common\Rules.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\DailyPostController.cs" />
     <Compile Include="Controllers\FriendsandMeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -652,6 +655,7 @@
     </Content>
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\web.config" />
+    <Content Include="Views\About\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

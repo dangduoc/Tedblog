@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AuthorizeFlickr</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+        <input type="button" id="btn" value="Get Code"/>
+        <label for="verifycode">Enter Your Code:</label>
+        <input type="text" id="verifycode" />
+        <input type="button" id="btn-submit"/>
+        <div id="inform"></div>
+    </div>
+    <script>
+        $(function () {
+            $("#btn").click(function () {
+                $.ajax({
+                    url: "/Upload/Authenticate",
+                    type: "post",
+                    success: function (data) {
+                        window.open(data, "_blank", "resizable=yes,top=500,left=500,width=600,height=400");
+                    }
+                })
+            })
+            $("#btn-submit").click(function () {
+                var code = $("#verifycode").val();
+                alert(code);
+                if (code == "") {
+                    alert("you need to enter the code!");
+                }
+                else {
+                    $.ajax({
+                        url: "/upload/CompleteAuth",
+                        data:{verifycode:code},
+                        type: "post",
+                        success: function (data) {
+                            if (data == 'True') {
+                                $("#inform").html("<span>Your file has been uploaded!</span>")
+                            }
+                            else {
+                                $("#inform").html("<span>Failed to upload!</span>")
+                            }
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+</body>
+</html>

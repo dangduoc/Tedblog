@@ -1,9 +1,15 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@section style{
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <script src="~/Content/wow.min.js"></script>
+    <script>
+ new WOW().init();
+    </script>
+}
 @Html.Partial("partialEditMoment")
-<div class="Container" style="color: white; margin-top: 50px; background-color: #2d2d30">
+<div class="Container" style="color: white; background-color: #2d2d30">
     <div id="img-modal" class="modal fade" role="dialog">
         <button type="button" style="right: 15px; z-index: 1002;top:50px;" class="close" data-dismiss="modal">&times;</button>
         <div class="modal-dialog" style="width: 90%; color: black !important">
@@ -111,7 +117,7 @@
             List<List<MyBlog.Models.BestMoment>> listmoment = (List<List<MyBlog.Models.BestMoment>>)ViewBag.list;
             for (int i = 0; i < listmoment.Count; i++)
             {
-                <div class="row">
+                <div class="row wow fadeIn" data-wow-duration="2s" data-wow-delay="0.5s">
                     @foreach (var photo in listmoment[i])
                     {
                         <div class="col-sm-4">
@@ -120,14 +126,12 @@
                                 <p class="title text-center">@photo.Title</p>
                                 <p class="summary" hidden>@photo.Summary</p>
                                 <p class="author text-center" style="font-size:13px"><mark>@data.users.Where(u => u.userID == photo.userID).FirstOrDefault().username</mark></p>
-
                             </div>
                         </div>
                     }
                 </div>
             }
         }
-
     </div>
 </div>
 <style type="text/css">
@@ -157,11 +161,10 @@
     }
 </style>
 @section meta{
-    <meta property="og:site_name" content="Ted's Blog'" />
-    <meta property="og:url" content='http://dangduoc.azurewebsites.net/FriendsandMe/Moments' />
-    <meta property="og:type" content="collection" />
-    <meta property="og:title" content="Ted's Gallery'" />
-    <meta property="og:description" content="" />
-    <meta property="og:image" content="https://lh3.googleusercontent.com/C9IFs5DvWGPwasEkxRAN3Nopx8UeQraeuG5lILmrZGfLGRJwFW2bXpDovoOXOrdnmPOGWExBM6cPugo2E18GZTj6riQpIbxAcKFWtHwWOgY3SjI_2mxzX-z7CPQwdWh76222wtOh6CAJM4em6rpqv7BjcRvKcyHhV5wRFaBC-O5ZIgDdGYWH4KmE-MKL6rjzfcesce4-3WF2g2MTUDxZf-9GB-cZ8WpWdLyt0_D4aOEYXYsZk_1CGQMCPz3-0b8fpecw1xYW_bqPRMqRRXMe_UuSjyfwTfxk12I27jrNtBxAsnTnTBU2QX66WvCqq1CKy06FjG86CCPcbWXSu0ltRznAdDvIyjMYducwQxRPPBOth6prgMr353U-hksMntbqqCtT1q1S_Q9wZw_7rP6NoNkF1CFRfiav3ydOWuz2ens9YpDhUyg9I0J-a-EAlcnJrn9xTlmB57tNPrlgeVZeXRazjZGPFr3zXCoPOKDh3NwqJjnATa4bpy-dJjfB3Ph67YJaOqw9vXm_SjShm84KnGka1uNZA6x81hZq-f3S33Glf_DevLftEnQll0OorhPsavvx=w1200-h500-no">
-    <meta property="fb:app_id" content="219237851782524" />
+   <meta property="og:site_name" content="Ted's Blog'" />
+<meta property="og:url" content="http://duocdang.azurewebsites.net/FriendsandMe/Moments" />
+<meta property="og:title" content="Ted's Gallery" />
+<meta property="og:description" content="" />
+<meta property="og:image" content="https://lh3.googleusercontent.com/C9IFs5DvWGPwasEkxRAN3Nopx8UeQraeuG5lILmrZGfLGRJwFW2bXpDovoOXOrdnmPOGWExBM6cPugo2E18GZTj6riQpIbxAcKFWtHwWOgY3SjI_2mxzX-z7CPQwdWh76222wtOh6CAJM4em6rpqv7BjcRvKcyHhV5wRFaBC-O5ZIgDdGYWH4KmE-MKL6rjzfcesce4-3WF2g2MTUDxZf-9GB-cZ8WpWdLyt0_D4aOEYXYsZk_1CGQMCPz3-0b8fpecw1xYW_bqPRMqRRXMe_UuSjyfwTfxk12I27jrNtBxAsnTnTBU2QX66WvCqq1CKy06FjG86CCPcbWXSu0ltRznAdDvIyjMYducwQxRPPBOth6prgMr353U-hksMntbqqCtT1q1S_Q9wZw_7rP6NoNkF1CFRfiav3ydOWuz2ens9YpDhUyg9I0J-a-EAlcnJrn9xTlmB57tNPrlgeVZeXRazjZGPFr3zXCoPOKDh3NwqJjnATa4bpy-dJjfB3Ph67YJaOqw9vXm_SjShm84KnGka1uNZA6x81hZq-f3S33Glf_DevLftEnQll0OorhPsavvx=w1200-h500-no">
+<meta property="fb:app_id" content="219237851782524" />
 }

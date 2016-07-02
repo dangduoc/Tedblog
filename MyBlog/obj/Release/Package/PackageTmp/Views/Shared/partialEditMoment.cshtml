@@ -1,0 +1,181 @@
+﻿<div id="editpost-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="width:700px;">
+            <div class="modal-header">
+                <button type="button" id="close" class="close" data-dismiss="modal" style="color: black; top: 5px; right: 5px;">&times;</button>
+                <h4 class="modal-title">Upload Photo</h4>
+            </div>
+            <div class="modal-body">
+                <div role="form" id="form-edit">
+                    <div class="form-group">
+                        <label for="Title">Title</label>
+                        <input class="form-control" id="Title" value="" />
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Your Photo</label><br />
+                        <div id="next-upload" style="display:none">
+                            <label for='verifycode'>Enter your access token for uploading photo to my collection</label><br />
+                            <input type='text' id='verifycode' />
+                            <button class='btn btn-default' id='verify-btn'>Check Token</button>
+                            <button class='btn btn-default' id='gettoken-btn'>Get Token</button>
+                        </div>
+                        <form id="form-upload" method="post" action="/Upload/index" style="display:none" enctype="multipart/form-data">
+                            <input type="file" name="file" id="file" />
+                            <input class="btn btn-default btn-sm" type="submit" value="Upload" id="upload" />
+                            <span id="loading" style="display:none">
+                                Please wait, your photo is loading! <i class='fa fa-spinner' aria-hidden='true'></i>
+                            </span>
+                        </form>
+
+                        <style>
+                            #file::-webkit-file-upload-button {
+                                visibility: hidden;
+                            }
+                            #file::before {
+                                content: 'Choose file';
+                                display: inline-block;
+                                border-radius: 3px;
+                                padding: 5px 8px;
+                                outline: none;
+                                white-space: nowrap;
+                                -webkit-user-select: none;
+                                cursor: pointer;
+                                font-size: 10pt;
+                                color: #333;
+                                background-color: #fff;
+                                border:0.5px solid #ccc;
+                            }
+                        </style>
+                        <script>
+                            $(function () {
+                                $(window).load(function(){
+                                    $.ajax({
+                                        url: "/Upload/checkToken",
+                                        type: "post",
+                                        success: function (data) {
+                                            if (data == true) {
+                                                $("#form-upload").slideToggle();
+                                                $("#next-upload").hide();
+                                            }
+                                            if (data == false) {
+                                                $("#next-upload").slideToggle();
+                                            }
+                                        }
+                                    })
+                                });
+                                $("#gettoken-btn").click(function () {
+                                    $.ajax({
+                                        url: "/Upload/Authenticate",
+                                        type: "post",
+                                        success: function (data) {
+                                            window.open(data, "_blank", "resizable=yes,top=500,left=500,width=600,height=400");
+                                        }
+                                    })
+                                });
+                                $("#verify-btn").on("click", function () {
+                                    var code = $("#verifycode").val();
+                                    alert(code);
+                                    if (code == "") {
+                                        alert("you need to enter the code!");
+                                    }
+                                    else {
+                                        $.ajax({
+                                            url: "/Upload/CompleteAuth",
+                                            data: { verifycode: code },
+                                            type: "post",
+                                            success: function (data) {
+                                                if (data == true) {
+                                                    alert("Succeeded! Now you can upload photo");
+                                                    $("#form-upload").slideDown();
+                                                }
+                                                else {
+                                                    alert('Failed to get token');
+                                                }
+                                            }
+                                        })
+                                    }
+                                });
+                                $("#form-upload").on("submit", function (e) {
+                                    e.preventDefault();
+                                    var data = new FormData();
+                                    var files = $("#file").get(0).files;
+
+                                    if (files.length > 0) { data.append("HelpSectionImages", files[0]); }
+                                    $.ajax({
+                                        url: "/Upload/Index",
+                                        type: "post",
+                                        data: data,
+                                        processData: false,
+                                        contentType: false,
+                                        beforeSend: function (xhr) {
+                                            $("#loading").show();
+                                        },
+                                        success: function (data) {
+                                            if (data == "InvalidFile") {
+                                                alert("No file Uploaded");
+                                            }
+                                            else {
+                                                $("#loading").hide();
+                                                $("#preview-photo").attr("src", data);
+                                            }
+                                        }
+                                    })
+                                })
+                            })
+                        </script>
+                        <div style="width:80%;"> 
+                            <img id="preview-photo" style="max-width:100%" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label data-toggle="collapse" data-target="#icon" style="cursor:pointer">Icon<span class="caret"></span></label>
+                        <div id="icon" class="collapse">
+                            <i class="fa fa-hand-o-right" aria-hidden="true"></i><code>&lti class="fa fa-hand-o-right" aria-hidden="true"&gt&lt/i&gt</code><br />
+                            <i class="fa fa-circle" aria-hidden="true"></i><code>&lti class="fa fa-circle" aria-hidden="true"&gt&lt/i&gt</code><br />
+                            <i class="fa fa-bicycle" aria-hidden="true"></i><code>&lti class="fa fa-bicycle" aria-hidden="true"&gt&lt/i&gt</code><br />
+                            <i class="fa fa-thumbs-up" aria-hidden="true"></i><code>&lti class="fa fa-thumbs-up" aria-hidden="true"&gt&lt/i&gt</code><br />
+                            <i class="fa fa-thumbs-down" aria-hidden="true"></i><code>&lti class="fa fa-thumbs-down" aria-hidden="true"&gt&lt/i&gt</code><br />
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><code>&lti class="fa fa-pencil-square-o" aria-hidden="true"&gt&lt/i&gt</code><br />
+                            <i class="fa fa-heart" aria-hidden="true"></i><code>&lti class="fa fa-heart" aria-hidden="true"&gt&lt/i&gt</code><br />
+                            <i class="fa fa-meh-o" aria-hidden="true"></i><code>&lti class="fa fa-meh-o" aria-hidden="true"&gt&lt/i&gt</code><br />
+                            <i class="fa fa-plus" aria-hidden="true"></i><code>&lti class="fa fa-plus" aria-hidden="true"&gt&lt/i&gt</code><br />
+                            <i class="fa fa-question-circle" aria-hidden="true"></i><code>&lti class="fa fa-question-circle" aria-hidden="true"&gt&lt/i&gt</code><br />
+                            <i class="fa fa-smile-o" aria-hidden="true"></i><code>&lti class="fa fa-smile-o" aria-hidden="true"&gt&lt/i&gt</code><br />
+                            Get more: <a href="https://fortawesome.github.io/Font-Awesome/icons/" style="color:blue"> here</a>
+                        </div>
+                        <br/>
+                        <label for="content">Write something about your picture</label>
+                        <textarea class="form-control" rows="7" id="content"></textarea>
+                    </div>
+                    <button class="btn btn-default" id="edit">Post</button>
+                    <div id="inform"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#edit").click(function () {
+            var newmoment = {
+                Summary: $("#content").val(),
+                Image: $("#preview-photo").attr("src"),
+                title: $("#Title").val()
+            };
+            $.ajax({
+                url: "/FriendsandMe/Post",
+                type: "post",
+                data: JSON.stringify(newmoment),
+                contentType: "application/json",
+                success: function () {
+                    $("#inform").html("<div id='inform'></div>");
+                    location.reload();
+                },
+                error: function () {
+                    $("#inform").html("<span style='color:red'>Failed to edit, Something went wrong!</span>");
+                }
+            });
+        });
+    })
+</script>
