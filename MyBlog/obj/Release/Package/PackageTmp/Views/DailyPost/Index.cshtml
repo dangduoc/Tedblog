@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/stylePost.css" rel="stylesheet" />
+@model IEnumerable<MyBlog.Models.DailyPost>
+<div class="Container" style="padding: 0px; color: black; margin-top: 50px;">
+    <div class="row" style="height: 100vh; width: 100%; overflow: auto">
+        <div class="col-sm-5" id="left-post" style="position: relative; overflow: hidden;">
+            <img class="img-responsive" src='@Url.Content("~/Content/images/me.jpg")' />
+        </div>
+        <div class="col-sm-7" id="right-post">
+            @foreach(var post in Model)
+            {
+            <article class="post-articles">
+                <div class="entry">
+                    <header class="entry-header">
+                        <h2 class="entry-title">
+                            <a href="/DailyPost/Post?id=@post.postID.ToString()" title="" rel="">@post.postTitle</a>
+                        </h2>
+                    </header>
+                    <div class="entry-summary" itemprop="text">
+                        <p><small>@Html.Raw(post.postContent)</small></p>
+                    </div>
+                    <footer class="entry-footer">
+                        <span class="entry-date">
+                            <a href="" rel="">@post.dateWrite.ToString("MMMM dd,yyyy")</a></span>
+                        by: <span class="entry-author">
+                            <span class="author vcard">
+                                <a class="" href="" title="" rel="">Me</a>
+                            </span>
+                        </span>
+                    </footer>
+                </div>
+            </article>
+            }
+        </div>
+    </div>
+</div>

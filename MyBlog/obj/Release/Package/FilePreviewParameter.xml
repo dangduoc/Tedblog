@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="dangduoc" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\dangd\\Documents\\GitHub\\Tedblog\\MyBlog\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\dangd\\Documents\\GitHub\\Tedblog\\MyBlog\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="MyBlogDBModel-Web.config Connection String" description="" value="Data Source=duocblog.database.windows.net;Initial Catalog=cloudMyBlog;Persist Security Info=False;User ID=dangduoc;Password=Duoc1234;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;Application Name=EntityFramework" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\dangd\\Documents\\GitHub\\Tedblog\\MyBlog\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MyBlogDBModel']/@connectionString" />
+  </parameter>
+</parameters>
