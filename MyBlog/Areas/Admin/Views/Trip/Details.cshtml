@@ -1,0 +1,89 @@
+﻿@model MyBlog.Models.Trip
+
+@section CurrentPage{
+    <i class="fa fa-angle-right"></i>
+    <span>Những chuyến đi</span>
+    <i class="fa fa-angle-right"></i>
+    <span>Chi tiết</span>
+}
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                Mã người viết
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.userID)
+            </dd>
+
+            <dt>
+                Tiêu đề
+            </dt>
+
+            <dd>
+                <a href="/FriendsAndMe/Trip?id=@Model.postID">@Html.DisplayFor(model => model.postTitle)</a>
+            </dd>
+
+            <dt>
+                Tóm tắt
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.postSummary)
+            </dd>
+
+            <dt>
+                Ngày tạo
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.date)
+            </dd>
+            <dt>
+                Bạn bè
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.friends)
+            </dd>
+
+            <dt>
+                Thumbnail
+            </dt>
+
+            <dd>
+                <img src="@Model.imgThumbnail" class="img-responsive" style="max-width:200px"/>
+            </dd>
+
+            <dt>
+                Link folder ảnh
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.imageFolder)
+            </dd>
+
+            <dt>
+                Meta Image
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.metaImage)
+            </dd>
+
+            <dt>
+                Meta description
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.metaDescription)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.postID })
+    </p>

@@ -14,27 +14,15 @@ namespace MyBlog.Models
 
         public virtual DbSet<BestMoment> BestMoments { get; set; }
         public virtual DbSet<DailyPost> DailyPosts { get; set; }
-        public virtual DbSet<imageDailyPost> imageDailyPosts { get; set; }
         public virtual DbSet<previewTrip> previewTrips { get; set; }
+        public virtual DbSet<SlideImage> SlideImages { get; set; }
         public virtual DbSet<Trip> Trips { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<userInfo> userInfoes { get; set; }
         public virtual DbSet<userRole> userRoles { get; set; }
-        public virtual DbSet<SlideImage> SlideImages { get; set; }
-
+        public virtual DbSet<GalleryHome> GalleryHomes { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<DailyPost>()
-                .HasMany(e => e.imageDailyPosts)
-                .WithRequired(e => e.DailyPost)
-                .HasForeignKey(e => e.postID)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<DailyPost>()
-                .HasMany(e => e.imageDailyPosts1)
-                .WithRequired(e => e.DailyPost1)
-                .HasForeignKey(e => e.postID);
-
             modelBuilder.Entity<user>()
                 .Property(e => e.username)
                 .IsUnicode(false);

@@ -1,52 +1,46 @@
 ﻿@model IEnumerable<MyBlog.Models.DailyPost>
-<div class="Container">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <td>Post ID</td>
-                <td>Date</td>
-                <td>Title</td>
-                <td>Content</td>
-                <td colspan="3">Action</td>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var post in Model)
-            {
-                <tr id="row-@post.postID">
-                    <td>@post.postID</td>
-                    <td>@post.dateWrite.ToString("MMMM dd,yyyy")</td>
-                    <td>@post.postTitle</td>
-                    <td><p style="width:200px;overflow:hidden;white-space:nowrap">@post.postContent</p></td>
-                    <td><a class="btn btn-info" href="/DailyPost/Post?id=@post.postID.ToString()" target="_blank">View</a></td>
-                    <td><a class="btn btn-info" href="/DailyPost/EditPost?id=@post.postID.ToString()" target="_blank"><span class="btn-edit" data-id=@post.postID.ToString()>Edit</span></a></td>
-                    <td><button class="btn-delete btn btn-danger" data-id=@post.postID.ToString()>Delete</button></td>
-                </tr>
-            }
-        </tbody>
+@section CurrentPage{
+    Bài viết
+}
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+    <table class="table">
+        <tr>
+            <th>
+                Tiêu đề
+            </th>
+            <th>
+                Nội dung
+            </th>
+            <th>
+                Ngày viết
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.postTitle)
+            </td>
+            <td>
+                <p>
+                    @Html.Raw(item.postContent)
+                </p>
+            </td>
+            <td>
+                @item.dateWrite.ToShortDateString()
+            </td>
+            <td>
+                <img src="@item.metaImage" class="img-responsive" style="max-height:200px"/>
+            </td>
+            <td style="min-width:200px">
+                @Html.ActionLink("Edit", "Edit", new { id=item.postID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.postID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.postID })
+            </td>
+        </tr>
+    }
+    
     </table>
-</div>
-<script>
-        $(function () {
-            $(".btn-delete").click(function () {
-                var postid=$(this).attr("data-id");
-                if (confirm("You're gonna delete this post. Are you sure?"))
-                {
-                    $.ajax({
-                        url: "/DailyPost/DeletePost",
-                        type: "post",
-                        data: { id: postid },
-                        success: function (data) {
-                            if (data == "succeed") {
-                                $("#row-" + postid).remove();
-                            }
-                            else
-                            {
-                                alert(data);
-                            }
-                        }
-                    })
-                }
-            })
-        })
-</script>    

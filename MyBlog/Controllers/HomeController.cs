@@ -20,6 +20,7 @@ namespace MyBlog.Controllers
         {
             ViewBag.trips=data.Trips.OrderByDescending(p=>p.date).Take(6);
             ViewBag.Slide = data.SlideImages.OrderByDescending(s => s.id).Take(5);
+            ViewBag.Gallery = data.GalleryHomes.OrderByDescending(p => p.id).Take(16);
             return View();
         }
         //Security

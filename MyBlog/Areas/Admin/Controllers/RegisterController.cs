@@ -12,7 +12,16 @@ namespace MyBlog.Areas.Admin.Controllers
     {
         private MyBlogDBModel data = new MyBlogDBModel();
         // GET: Admin/Register
-        public ActionResult Index()
+        public ActionResult Login()
+        {
+            if (Session["current_user"] != null)
+            {
+                FormsAuthentication.SignOut();
+                Session.Abandon();
+            }
+            return View(new Models.Security.UserLogin());
+        }
+        public ActionResult Logout()
         {
             if (Session["current_user"] != null)
             {
@@ -22,15 +31,14 @@ namespace MyBlog.Areas.Admin.Controllers
             return View(new Models.Security.UserLogin());
         }
         [HttpPost]
-        public ActionResult Login(Models.Security.UserLogin userLogOn, string returnUrl)
+        public ActionResult Login(Models.Security.UserLogin userLogOn)
         {
-            string inform = "";
             if (ModelState.IsValid)
             {
                 string password = this.getPassword(userLogOn.UserName);
                 if (string.IsNullOrEmpty(password))
                 {
-                    inform = "Username does not exsist";
+                    ModelState.AddModelError("notexsist", "You don't have permission");
                 }
                 else
                 {
@@ -41,34 +49,22 @@ namespace MyBlog.Areas.Admin.Controllers
                         {
                             FormsAuthentication.SetAuthCookie(userLogOn.UserName, userLogOn.RememberMe);
                             Session["current_user"] = data.users.Where(_user => _user.username == userLogOn.UserName && _user.password == userLogOn.Password).FirstOrDefault();
-                            return RedirectToLocal(returnUrl);
+                            return RedirectToAction("index", "Home", new { area="Admin"});
                         }
                         else
                         {
-                            inform = "You don't have permission";
+                            ModelState.AddModelError("role","You don't have permission");
                         }
                     }
                     else
                     {
-                        inform = "Password is incorrect";
+                        ModelState.AddModelError("password","Password is incorrect");
                     }
                 }
             }
             else
-                inform = "input is invalid";
-            ViewBag.inform = inform;
+            ModelState.AddModelError("invalid", "Invalid Input");
             return View();
-        }
-        private ActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Register");
-            }
         }
         public string getPassword(string username)
         {

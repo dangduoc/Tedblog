@@ -1,107 +1,129 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MyBlog.Models;
+using MyBlog.Common;
 namespace MyBlog.Areas.Admin.Controllers
 {
-    [MyBlog.Common.CustomAthorize(Roles = "superadmin,admin,friends")]
+    [CustomAthorize(Roles = "superadmin,admin")]
     public class TripController : Controller
     {
-        private MyBlogDBModel data = new MyBlogDBModel();
+        private MyBlogDBModel db = new MyBlogDBModel();
+
         // GET: Admin/Trip
         public ActionResult Index()
         {
-            user crnt_user = (user)Session["current_user"];
-            if (crnt_user.role_id <= 1)
+            return View(db.Trips.ToList());
+        }
+
+        // GET: Admin/Trip/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
             {
-                return View(data.Trips);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else
+            Trip trip = db.Trips.Find(id);
+            if (trip == null)
             {
-                return View(data.Trips.Where(t => t.userID == crnt_user.userID));
+                return HttpNotFound();
             }
+            return View(trip);
         }
-        [HttpPost]
-        public void DeleteTrip(int id)
-        {
-            var tripid = Convert.ToInt32(id);
-            var trip = data.Trips.Where(t => t.postID == tripid).FirstOrDefault();
-            data.Trips.Remove(trip);
-            data.SaveChanges();
-        }
-        [HttpPost]
-        public ActionResult PendingTrips()
-        {
-            return View(data.previewTrips);
-        }
-        [HttpPost]
-        public void DeletePendingTrip(string id)
-        {
-            var postid = Convert.ToInt32(id);
-            var trip = data.previewTrips.Where(t => t.previewID == postid).FirstOrDefault();
-            data.previewTrips.Remove(trip);
-            data.SaveChanges();
-        }
-        [MyBlog.Common.CustomAthorize(Roles = "superadmin,admin,friends")]
-        public ActionResult WriteTrip()
+
+        // GET: Admin/Trip/Create
+        public ActionResult Create()
         {
             return View();
         }
-        [MyBlog.Common.CustomAthorize(Roles = "superadmin,admin,friends")]
-        [HttpPost, ValidateInput(false)]
-        public ActionResult WriteTrip(FormCollection form)
+
+        // POST: Admin/Trip/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "postID,userID,postTitle,postSummary,date,postContent,friends,imgThumbnail,imageFolder,metaImage,metaDescription")] Trip trip)
         {
-            if (!(String.IsNullOrEmpty(form["title"])) && !(String.IsNullOrEmpty(form["content"])) && (!String.IsNullOrEmpty(form["summary"])) && (!String.IsNullOrEmpty(form["thumbnail"])))
+            if (ModelState.IsValid)
             {
-                previewTrip newtrip = new previewTrip();
-                var total = data.previewTrips.Count();
-                if (total == 0)
-                {
-                    newtrip.previewID = 0;
-                }
-                else
-                {
-                    newtrip.previewID = data.previewTrips.OrderByDescending(p => p.previewID).FirstOrDefault().previewID + 1;
-                }
-                newtrip.postID = data.Trips.OrderByDescending(p => p.postID).FirstOrDefault().postID + 1;
-                newtrip.date = DateTime.Now;
-                newtrip.userID = ((user)Session["current_user"]).userID;
-                newtrip.postTitle = form["title"];
-                newtrip.postContent = form["content"];
-                newtrip.postSummary = form["summary"];
-                newtrip.imgThumbnail = form["thumbnail"];
-                if (!String.IsNullOrEmpty(form["folder"]))
-                {
-                    newtrip.imageFolder = form["folder"];
-                }
-                data.previewTrips.Add(newtrip);
-                data.SaveChanges();
-                return Redirect("http://dangduoc.azurewebsites.net/FriendsandMe/PreviewTrip?id=" + newtrip.previewID);
+                db.Trips.Add(trip);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            else
-                return View("Error");
-        }
-        [MyBlog.Common.CustomAthorize(Roles = "superadmin,admin,friends")]
-        public ActionResult EditTrip(int id)
-        {
-            var trip = data.Trips.Where(t => t.postID == id).FirstOrDefault();
+
             return View(trip);
         }
-        public ActionResult PreviewTrip(int id)
+
+        // GET: Admin/Trip/Edit/5
+        public ActionResult Edit(int? id)
         {
-            var trip = data.previewTrips.Where(t => t.previewID == id).FirstOrDefault();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Trip trip = db.Trips.Find(id);
+            if (trip == null)
+            {
+                return HttpNotFound();
+            }
             return View(trip);
         }
-        public ActionResult CheckEdit(int id)
+
+        // POST: Admin/Trip/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult Edit([Bind(Include = "postID,userID,postTitle,postSummary,date,postContent,friends,imgThumbnail,imageFolder,metaImage,metaDescription")] Trip trip)
         {
-            user crnt_user = (user)Session["current_user"];
-            var trip = data.Trips.Where(t => t.postID == id).FirstOrDefault();
-            if (crnt_user.userID != trip.userID)
-                return Json(false, JsonRequestBehavior.AllowGet);
-            else
-                return Json(true, JsonRequestBehavior.AllowGet);
+            if (ModelState.IsValid)
+            {
+                db.Entry(trip).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(trip);
+        }
+
+        // GET: Admin/Trip/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Trip trip = db.Trips.Find(id);
+            if (trip == null)
+            {
+                return HttpNotFound();
+            }
+            return View(trip);
+        }
+
+        // POST: Admin/Trip/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Trip trip = db.Trips.Find(id);
+            db.Trips.Remove(trip);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

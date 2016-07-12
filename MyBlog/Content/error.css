@@ -27,15 +27,15 @@ nav.vertical ul li{	display:block;}/* vertical menu */
 nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
 img{max-width:100%;}
 /*end reset*/
-html, body{
+html, body {
     font-size: 100%;
-	background: url(../images/banner.jpg) no-repeat 0px 0px;
+    background: url(../Content/images/error/banner.jpg) no-repeat 0px 0px;
     background-size: cover;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	-ms-background-size: cover;
-	font-family: 'Viga', sans-serif;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    font-family: 'Viga', sans-serif;
 }
 h1,h2,h3,h4,h5,h6,a,p{
 	margin:0;
@@ -258,7 +258,7 @@ body a:hover,body a{
 }
     .wthree_social_icons a:nth-of-type(1):before {
         content: '';
-        background: url(../images/img-sp.png) no-repeat 13px 11px;
+        background: url(../Content/images/error/img-sp.png) no-repeat 13px 11px;
         display: block;
         width: 40px;
         height: 40px;
@@ -268,7 +268,7 @@ body a:hover,body a{
 }
 .wthree_social_icons a:nth-of-type(2):before {
 	content:'';
-	background:url(../images/img-sp.png) no-repeat -18px 11px;
+	background:url(../Content/images/error/img-sp.png) no-repeat -18px 11px;
 	display:block;
 	width:40px;
 	height:40px;
@@ -278,7 +278,7 @@ body a:hover,body a{
 }
 .wthree_social_icons a:nth-of-type(3):before {
 	content:'';
-	background:url(../images/img-sp.png) no-repeat -53px 11px;
+	background:url(../Content/images/error/img-sp.png) no-repeat -53px 11px;
 	display:block;
 	width:40px;
 	height:40px;
@@ -288,7 +288,7 @@ body a:hover,body a{
 }
 .wthree_social_icons a:nth-of-type(4):before {
 	content:'';
-	background:url(../images/img-sp.png) no-repeat -89px 11px;
+	background:url(../Content/images/error/img-sp.png) no-repeat -89px 11px;
 	display:block;
 	width:40px;
 	height:40px;
@@ -299,7 +299,7 @@ body a:hover,body a{
 .wthree_social_icons a:nth-of-type(5):before {
 /*-- w3layouts --*/
 	content:'';
-	background:url(../images/img-sp.png) no-repeat -122px 11px;
+	background:url(../Content/images/error/img-sp.png) no-repeat -122px 11px;
 	display:block;
 	width:40px;
 	height:40px;

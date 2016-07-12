@@ -75,6 +75,6 @@ C:\Users\dangd\Documents\GitHub\Tedblog\MyBlog\bin\System.Web.Razor.xml
 C:\Users\dangd\Documents\GitHub\Tedblog\MyBlog\bin\System.Web.WebPages.xml
 C:\Users\dangd\Documents\GitHub\Tedblog\MyBlog\bin\System.Web.WebPages.Deployment.xml
 C:\Users\dangd\Documents\GitHub\Tedblog\MyBlog\bin\System.Web.WebPages.Razor.xml
-C:\Users\dangd\Documents\GitHub\Tedblog\MyBlog\obj\Release\MyBlog.csprojResolveAssemblyReference.cache
 C:\Users\dangd\Documents\GitHub\Tedblog\MyBlog\obj\Release\MyBlog.dll
 C:\Users\dangd\Documents\GitHub\Tedblog\MyBlog\obj\Release\MyBlog.pdb
+C:\Users\dangd\Documents\GitHub\Tedblog\MyBlog\obj\Release\MyBlog.csprojResolveAssemblyReference.cache

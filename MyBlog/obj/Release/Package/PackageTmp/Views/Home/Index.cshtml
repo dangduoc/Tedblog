@@ -74,16 +74,43 @@
         .img-contact {
             width: 20px;
         }
+       .recent-post{
+	position: relative;
+	display: block;
+	margin-bottom: 20px;
+}
+.recent-post:hover{
+	background-color: rgba(0,0,0,0.5);
+}
+.recent-post div{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	right: 0;
+	top:0;
+	opacity: 0;
+	background-color: rgba(0,0,0,0.7);
+	transition: opacity 0.7s;
+	-webkit-transition:opacity 0.7s;
+}
+.recent-post div a{
+	color:#fff !important;
+}
+.recent-post:hover div{
+	opacity: 1;
+}
+}
     }
 </style>
+
 @using MyBlog.Models;
 <div class="page-header" aria-expanded='true' style="margin: 0 !important; background-color: #eee">
     <ul class="list-inline" id="about-row">
         <li style="width:25%;padding:10px;">
-            <img class="thumbnail wow slideInLeft data-wow-duration='2s'" src='@Url.Content("~/Content/images/aboutme.jpg")' id="aboutme-img" />
+            <img class="thumbnail wow slideInLeft data-wow-duration='1s'" src='@Url.Content("~/Content/images/aboutme.jpg")' id="aboutme-img" />
         </li>
         <li style="width:70%;padding-left:20px;">
-            <h1 id="h1-about" class="wow slideInRight data-wow-duration='2s' data-wow-delay='1s'">
+            <h1 id="h1-about" class="wow slideInRight" data-wow-duration='1s' data-wow-delay='0.5s'>
                 Hi!<br />
                 <small>
                     This is me, I'm writing this blog mainly to get things out of my head by writing it down.
@@ -93,7 +120,7 @@
                     <strong>You can contact with me via:</strong>
                 </small>
             </h1>
-            <ul class="list-inline wow bounceIn data-wow-duration='4s' data-wow-delay='5s'">
+            <ul class="list-inline wow bounceIn" data-wow-duration='1s' data-wow-delay='1s'>
                 <li>
                     <a href="https://facebook.com/dangduoc.95" target="_blank">
                         <img src='@Url.Content("~/Content/images/facebook.png")' class="img-contact">
@@ -123,7 +150,7 @@
         </li>
     </ul>
 </div>
-<div id="myCarousel wow fadeInUp data-wow-duration='1s'" class="carousel slide" data-ride="carousel">
+<div id="myCarousel wow fadeInUp" data-wow-duration='1s' class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators" style="bottom: 80px">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -247,54 +274,14 @@
             <div class="item">
                 <div class="clearfix" style="max-width: 100%;">
                     <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                        <li data-thumb="https://farm8.staticflickr.com/7757/26191886113_8ec9b9e169_m.jpg">
-                            <img src="https://farm8.staticflickr.com/7757/26191886113_8ec9b9e169_b.jpg" class="img-responsive" />
+                        @foreach(GalleryHome g in ViewBag.Gallery)
+                        {
+                            string thumb = g.url + "_m.jpg";
+                            string url = g.url + "_b.jpg";
+                        <li data-thumb="@thumb">
+                            <img src="@url" class="img-responsive" />
                         </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1656/26631423811_c6b1401e9b_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1656/26631423811_c6b1401e9b_b.jpg" class="img-responsive" />
-                        </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1717/26604485872_2f48e92eaa_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1717/26604485872_2f48e92eaa_b.jpg" class="img-responsive" />
-                        </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1470/26604486082_15bbec94c5_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1470/26604486082_15bbec94c5_b.jpg" class="img-responsive" />
-                        </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1698/26697554735_50d11a2853_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1698/26697554735_50d11a2853_b.jpg" class="img-responsive" />
-                        </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1497/26631423851_771c73b1ba_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1497/26631423851_771c73b1ba_b.jpg" class="img-responsive" />
-                        </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1495/26697554145_aef4327ebb_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1495/26697554145_aef4327ebb_b.jpg" class="img-responsive" />
-                        </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1700/26697553925_fe3f400c45_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1700/26697553925_fe3f400c45_b.jpg" class="img-responsive" />
-                        </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1553/26631424181_296cb5cda2_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1553/26631424181_296cb5cda2_b.jpg" class="img-responsive" />
-                        </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1573/26604486852_696525d323_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1573/26604486852_696525d323_b.jpg" class="img-responsive" />
-                        </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1474/26604486182_c0d6b42dd7_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1474/26604486182_c0d6b42dd7_b.jpg" class="img-responsive" />
-                        </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1698/26604486402_1c00e2cba9_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1698/26604486402_1c00e2cba9_b.jpg" class="img-responsive" />
-                        </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1616/26631424361_62e71d8aa8_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1616/26631424361_62e71d8aa8_b.jpg" class="img-responsive" />
-                        </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1608/26631423981_e0bf0c0b07_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1608/26631423981_e0bf0c0b07_b.jpg" class="img-responsive" />
-                        </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1633/26604486552_8a8a6daca1_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1633/26604486552_8a8a6daca1_b.jpg" class="img-responsive" />
-                        </li>
-                        <li data-thumb="https://farm2.staticflickr.com/1693/26631424621_16e8e56ef2_m.jpg">
-                            <img src="https://farm2.staticflickr.com/1693/26631424621_16e8e56ef2_b.jpg" class="img-responsive" />
-                        </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -323,7 +310,7 @@
         }
 
         .content-slider img {
-            max-height: 100%;
+            max-height: 170px;
         }
 
         .lSSlideOuter .lSPager.lSpg {
@@ -331,8 +318,8 @@
         }
     </style>
     <div class="row" style="color: #fff">
-        <div class="item  wow zoomIn data-wow-duration='5s' data-wow-delay='1s'">
-            <ul id="content-slider" class="content-slider" style="height:170px;">
+        <div class="item  wow zoomIn" data-wow-duration='5s' data-wow-delay='1s'>
+            <ul id="content-slider" class="content-slider">
                 @foreach (MyBlog.Models.Trip t in ViewBag.trips)
                 {
                     string img = (!String.IsNullOrEmpty(t.imgThumbnail)) ? t.imgThumbnail : "";
@@ -388,11 +375,10 @@
 
 @section meta{
     <meta property="og:site_name" content="Blog Ted" />
-    <meta property="og:url" content='http://dangduoc.azurewebsites.net/' />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Ted's Blog" />
+    <meta property="og:url" content="http://duocdang.azurewebsites.net" />
+    <meta property="og:title" content="My Blog" />
     <meta property="og:description" content="Chia sẻ niềm vui, tâm trạng, các thứ. Chỗ cho anh em bạn bè chém gió. Cập nhập những thông tin nóng hỏi hàng ngày của lũ bạn khốn nạn.
                    Ảnh troll, các thứ :))" />
-    <meta property="og:image" content="@Url.Content("~/Content/images/aboutme.jpg")" />
+    <meta property="og:image" content="http://i.imgur.com/UTkO6NI.jpg" />
     <meta property="fb:app_id" content="219237851782524" />
 }

@@ -12,16 +12,11 @@ namespace MyBlog
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-      //      routes.MapRoute(
-      //    name: "pages",
-      //    url: "{controller}/{action}/{page}",
-      //    defaults: new { page = UrlParameter.Optional }
-      //);
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] {"MyBlog"}
+                namespaces: new[] { "MyBlog.Controllers" }
             );
             
         }

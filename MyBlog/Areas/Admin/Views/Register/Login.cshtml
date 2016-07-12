@@ -1,0 +1,42 @@
+﻿@model MyBlog.Models.Security.UserLogin
+@section CurrentPage{
+    <i class="fa fa-angle-right"></i>
+    <span>Đăng Nhập</span>
+}
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="wrapper-dialog">
+    <div class="wrapper-dialog-second"></div>
+    <div id="dialog-login">
+        <div id="switch-login-area">
+            <div class="label-login" id="label-login" style="width:100%">Đăng Nhập Tài Khoản Admin</div>
+        </div>
+        <div id="content-login-area">
+            <div id="content-login" class="dialog-login-content">
+                <div class="form-login">
+                    @using (Html.BeginForm("Login", "Register", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.UserName, new { placeholder = "Tài khoản", id = "usernameLogin" })
+                            @Html.ValidationMessageFor(model => model.UserName)
+                        </div>
+                            <div class="editor-field">
+                                @Html.PasswordFor(model => model.Password, new { placeholder = "Mật khẩu", id = "passwordLogin" })
+                                @Html.ValidationMessageFor(model => model.Password)
+                            </div>
+                            <div id="alertlogin"></div>
+                            <div class="editor-field">
+                                <br />
+                                <input type="checkbox" name="rememberme" id="rememberme" />
+                                Nhớ đăng nhập
+                            </div>
+                            <input type="submit" value="Login" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

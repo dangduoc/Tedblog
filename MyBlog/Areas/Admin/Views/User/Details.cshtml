@@ -1,0 +1,57 @@
+﻿@model MyBlog.Models.user
+@section CurrentPage{
+    <i class="fa fa-angle-right"></i>
+    <span>Tài khoản</span>
+    <i class="fa fa-angle-right"></i>
+    <span>Xóa</span>
+}
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.userInfo.name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.userInfo.name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.userRole.role)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.userRole.role)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.username)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.username)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.password)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.password)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.useremail)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.useremail)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.userID }) 
+    </p>

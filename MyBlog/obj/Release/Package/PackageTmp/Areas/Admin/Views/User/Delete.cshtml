@@ -1,0 +1,67 @@
+﻿@model MyBlog.Models.user
+
+@section CurrentPage{
+    <i class="fa fa-angle-right"></i>
+    <span>Tài khoản</span>
+    <i class="fa fa-angle-right"></i>
+    <span>Xóa</span>
+}
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>user</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.userInfo.name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.userInfo.name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.userRole.role)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.userRole.role)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.username)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.username)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.password)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.password)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.useremail)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.useremail)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>

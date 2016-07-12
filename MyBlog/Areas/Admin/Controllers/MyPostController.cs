@@ -1,74 +1,130 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MyBlog.Models;
+using MyBlog.Common;
 namespace MyBlog.Areas.Admin.Controllers
 {
-    [MyBlog.Common.CustomAthorize(Roles = "superadmin")]
+    [CustomAthorize(Roles = "superadmin,admin")]
     public class MyPostController : Controller
     {
-        private MyBlogDBModel data = new MyBlogDBModel();
+        private MyBlogDBModel db = new MyBlogDBModel();
+
         // GET: Admin/MyPost
         public ActionResult Index()
         {
-            return View(data.DailyPosts);
+            return View(db.DailyPosts.OrderByDescending(p=>p.postID).ToList());
         }
-        public ActionResult WritePost()
+
+        // GET: Admin/MyPost/Details/5
+        public ActionResult Details(int? id)
         {
-            ViewBag.OK = TempData["writepost"];
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DailyPost dailyPost = db.DailyPosts.Find(id);
+            if (dailyPost == null)
+            {
+                return HttpNotFound();
+            }
+            return View(dailyPost);
+        }
+
+        // GET: Admin/MyPost/Create
+        public ActionResult Create()
+        {
             return View();
         }
-        [HttpPost, ValidateInput(false)]
-        public ActionResult WritePost(FormCollection form)
-        {
-            if ((string.IsNullOrEmpty(form["title"]) || (string.IsNullOrEmpty(form["content"])) || (string.IsNullOrEmpty(form["date"]))))
-            {
-                TempData["writepost"] = "Input is invalid";
-            }
-            else
-            {
-                DailyPost newpost = new DailyPost();
-                newpost.postID = data.DailyPosts.Count() + 1;
-                newpost.postTitle = form["title"];
-                newpost.postContent = form["content"].ToString();
-                newpost.dateWrite = DateTime.Parse(form["date"]);
-                data.DailyPosts.Add(newpost);
-                data.SaveChanges();
-                TempData["writepost"] = "Successfully Posted";
-            }
-            return RedirectToAction("WritePost");
-        }
-        public ActionResult EditPost(int id)
-        {
-            ViewBag.OK = TempData["editpost"];
-            return View(data.DailyPosts.Where(p => p.postID == id).FirstOrDefault());
-        }
+
+        // POST: Admin/MyPost/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult EditPost(FormCollection form)
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult Create([Bind(Include = "postID,postTitle,postContent,dateWrite")] DailyPost dailyPost)
         {
-            DailyPost newpost = new DailyPost();
-            newpost.postID = Convert.ToInt32(form["postid"]);
-            newpost.postTitle = form["title"];
-            newpost.postContent = form["content"].ToString();
-            newpost.dateWrite = DateTime.Parse(form["date"]);
-            DailyPost p = data.DailyPosts.Where(post => post.postID == newpost.postID).FirstOrDefault();
-            p.dateWrite = newpost.dateWrite;
-            p.postContent = newpost.postContent;
-            p.postTitle = newpost.postTitle;
-            data.SaveChanges();
-            TempData["editpost"] = "Successfully Edited";
-            return RedirectToAction("EditPost", new { id = p.postID });
+            if (ModelState.IsValid)
+            {
+                db.DailyPosts.Add(dailyPost);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(dailyPost);
         }
-        [HttpPost]
-        public string DeletePost(string id)
+
+        // GET: Admin/MyPost/Edit/5
+        public ActionResult Edit(int? id)
         {
-            int idpost = Convert.ToInt32(id);
-            DailyPost p = data.DailyPosts.Where(post => post.postID == idpost).FirstOrDefault();
-            data.DailyPosts.Remove(p);
-            data.SaveChanges();
-            return "succeed";
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DailyPost dailyPost = db.DailyPosts.Find(id);
+            if (dailyPost == null)
+            {
+                return HttpNotFound();
+            }
+            return View(dailyPost);
+        }
+
+        // POST: Admin/MyPost/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult Edit([Bind(Include = "postID,postTitle,postContent,dateWrite")] DailyPost dailyPost)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(dailyPost).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(dailyPost);
+        }
+
+        // GET: Admin/MyPost/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DailyPost dailyPost = db.DailyPosts.Find(id);
+            if (dailyPost == null)
+            {
+                return HttpNotFound();
+            }
+            return View(dailyPost);
+        }
+
+        // POST: Admin/MyPost/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            DailyPost dailyPost = db.DailyPosts.Find(id);
+            db.DailyPosts.Remove(dailyPost);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

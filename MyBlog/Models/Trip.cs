@@ -32,5 +32,11 @@ namespace MyBlog.Models
         public string imgThumbnail { get; set; }
 
         public string imageFolder { get; set; }
+
+        [StringLength(500)]
+        public string metaImage { get; set; }
+
+        [StringLength(500)]
+        public string metaDescription { get; set; }
     }
 }

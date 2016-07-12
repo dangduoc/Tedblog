@@ -1,56 +1,54 @@
 ﻿@model IEnumerable<MyBlog.Models.Trip>
-<div class="Container">
-    <h2>Danh sách các bài viết chuyến đi</h2>
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <td>Mã</td>
-                    <td>Tên</td>
-                    <td>Ngày viết</td>
-                    <td>Người viết</td>
-                    <td>Tóm tắt</td>
-                    <td colspan="3"></td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var trip in Model)
-                {
-                    <tr id="row-@trip.postID">
-                        <td>@trip.postID</td>
-                        <td>@trip.postTitle</td>
-                        <td>@trip.date.Value.ToString("MMMM dd,yyyy")</td>
-                        <td>@MyBlog.Common.Methods.findusernameByID((int)trip.userID)</td>
-                        <td>@trip.postSummary</td>
-                        <td>
-                            <a class="btn btn-primary" href="/FriendsandMe/Trip?id=@trip.postID" target="_blank">Xem</a>
-                        </td>
-                        <td>
-                            <a class="edit btn btn-primary" href="/FriendsandMe/EditTrip?id=@trip.postID" target="_blank">Sửa</a>
-                        </td>
-                        <td>
-                            <a class="delete btn btn-danger" data-id="@trip.postID">Xóa</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
-<script>
-    $(function () {
-        $(".delete").click(function () {
-            var postid = $(this).attr("data-id");
-            if (confirm("You're gonna delete this article. Are you sure?")) {
-                $.ajax({
-                    url: "/Admin/DeleteTrip",
-                    type: "post",
-                    data: { id: postid },
-                    success: function (data) {
-                            $("#row-" + postid).remove();
-                    }
-                })
-            }
-        })
-    })
-</script>    
+
+@section CurrentPage{
+    <i class="fa fa-angle-right"></i>
+    <span>Những chuyến đi</span>
+}
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+    <table class="table container">
+        <tr>
+            <th>
+                Tiêu đề
+            </th>
+            <th>
+                Tóm tắt
+            </th>
+            <th>
+                Ngày viết
+            </th>
+            <th>
+                Bạn bè
+            </th>
+            <th>
+                Folder ảnh
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                <a href="/FriendsAndMe/Trip?id=@item.postID" target="_blank">@Html.DisplayFor(modelItem => item.postTitle)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.postSummary)
+            </td>
+            <td>
+                @item.date.Value.ToShortDateString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.friends)
+            </td>
+            <td>
+                <a href="@Html.DisplayFor(modelItem => item.imageFolder)">Xem</a> 
+            </td>
+            <td style="min-width:200px">
+                @Html.ActionLink("Edit", "Edit", new { id=item.postID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.postID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.postID })
+            </td>
+        </tr>
+    }
+    </table>

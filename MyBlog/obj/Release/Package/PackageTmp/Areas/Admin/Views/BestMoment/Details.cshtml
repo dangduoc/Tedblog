@@ -1,0 +1,60 @@
+﻿@model MyBlog.Models.BestMoment
+
+@section CurrentPage{
+    <i class="fa fa-angle-right"></i>
+    <span>Gallery</span>
+    <i class="fa fa-angle-right"></i>
+    <span>Chi tiết</span>
+}
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <h4>BestMoment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Mã người tạo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userID)
+        </dd>
+
+        <dt>
+            Ngày tạo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_create)
+        </dd>
+        <dt>
+            Tiêu đề
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            Ảnh hiển thị
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            Tóm tắt nội dung
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Summary)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.momentID }) |
+</p>
