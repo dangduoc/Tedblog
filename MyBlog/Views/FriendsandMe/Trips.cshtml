@@ -12,14 +12,16 @@
     <div class="row">
         <div class="col-sm-9">
             <div class="nav-top-article" style="margin-bottom:20px;">
-                <a href="/Home">Home</a> <i class="fa fa-angle-right"></i><a href="FriendsandMe/Trips">Trips</a>
+                <a href="/Home">Home</a> <i class="fa fa-angle-right"></i><a href="/FriendsandMe/Trips">Trips</a>
             </div>
             @foreach (var trip in Model)
             {
                 var photo = trip.imgThumbnail;
                 <article id="" class="" style="margin-bottom: 50px;">
-                    <div class="">
-                        <img src='@Url.Content(photo)' style="max-width: 100%" />
+                    <div>
+                        <div style="max-height:500px;overflow:hidden">
+                            <img src='@Url.Content(photo)' style="max-width: 100%" />
+                        </div>
                         <div class="header-standard text-center" style="margin-top: 10px; margin-bottom: 20px;">
                             <h2><a href="/FriendsandMe/Trip?id=@trip.postID.ToString()" class="text-uppercase">@trip.postTitle</a></h2>
                             <div class="">
@@ -28,9 +30,9 @@
                                 <span>written by: </span> <a href="" class="author">@data.userInfoes.Where(u => u.userID == trip.userID).FirstOrDefault().name</a>
                             </div>
                         </div>
-                        <div class="">
-                            <div class="">
-                                <div class="" style="margin-bottom: 20px; border-bottom: ">
+                        <div>
+                            <div>
+                                <div  style="margin-bottom: 20px; ">
                                     <div class="">
                                         <span><i class="fa fa-calendar-o"></i>@trip.date.Value.ToString("MMMM dd,yyyy")</span>
                                         <span>|<span>
@@ -39,7 +41,7 @@
                                                 <a target="_blank" href="" class="fb"><i class="fa fa-facebook"></i><span>Share</span></a>
                                     </div>
                                 </div>
-                                <div class="">
+                                <div>
                                     <p>@trip.postSummary</p>
                                     <div class="text-center text-uppercase"><a href="/FriendsandMe/Trip?id=@trip.postID.ToString()" class="read-more">Continue Reading</a></div>
                                 </div>
@@ -108,3 +110,12 @@
         </div>
     </div>
 </div>
+@section meta{
+    <meta property="og:site_name" content="Ted's Blog'" />
+    <meta property="og:url" content='http://duocdang.azurewebsites.net/FriendsandMe/Trips' />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="All the trips" />
+    <meta property="og:description" content="Tổng hợp các chuyến đi chơi của tôi và bạn bè" />
+    <meta property="og:image" content="https://c2.staticflickr.com/8/7739/26849169596_76446a36e0_c.jpg">
+    <meta property="fb:app_id" content="219237851782524" />
+}

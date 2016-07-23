@@ -653,7 +653,7 @@
     <Compile Include="Common\Rules.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\DailyPostController.cs" />
-    <Compile Include="Controllers\ErrorPageController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FriendsandMeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
@@ -682,7 +682,7 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\web.config" />
     <Content Include="Views\About\Index.cshtml" />
-    <Content Include="Views\ErrorPage\Oops.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

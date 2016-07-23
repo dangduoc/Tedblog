@@ -6,13 +6,13 @@ using System.Web.Mvc;
 
 namespace MyBlog.Controllers
 {
-    public class ErrorPageController : Controller
+    public class ErrorController : Controller
     {
-        // GET: ErrorPage
-        public ActionResult Oops(int id)
+        // GET: Error
+        public ActionResult Index(int id)
         {
-            Response.StatusCode = id;
             ViewBag.ErrorCode = id;
+            Response.StatusCode = id;
             return View();
         }
     }

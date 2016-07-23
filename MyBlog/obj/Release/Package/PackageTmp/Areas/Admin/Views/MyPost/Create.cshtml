@@ -19,8 +19,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.postID, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.postID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.postID, "", new { @class = "text-danger" })
+                    <input name="postID" value="@ViewBag.id" readonly="readonly" class="form-control"/>
                 </div>
             </div>
     

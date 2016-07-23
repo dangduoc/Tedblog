@@ -39,6 +39,8 @@ namespace MyBlog.Areas.Admin.Controllers
         // GET: Admin/MyPost/Create
         public ActionResult Create()
         {
+            int id=db.DailyPosts.OrderByDescending(p => p.postID).FirstOrDefault().postID + 1;
+            ViewBag.id = id;
             return View();
         }
 

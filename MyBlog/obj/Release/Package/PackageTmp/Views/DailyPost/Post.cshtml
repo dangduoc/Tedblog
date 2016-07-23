@@ -3,7 +3,7 @@
 }
 @model MyBlog.Models.DailyPost
  @{
-            var str = "http://dangduoc.azurewebsites.net/DailyPost/Post?id=" + Model.postID;
+            var str = "http://duocdang.azurewebsites.net/DailyPost/Post?id=" + Model.postID;
        
         }
 <link href="~/Content/stylePost.css" rel="stylesheet" />
@@ -40,5 +40,5 @@
     <meta property="og:title" content="@Model.postTitle" />
     <meta property="og:description" content="@Model.postContent" />
     <meta property="fb:app_id" content="219237851782524" />
-    <meta property="og:image" content="@Url.Content("~/Content/images/about_image.png")" />
+    <meta property="og:image" content="@Model.metaImage" />
 }

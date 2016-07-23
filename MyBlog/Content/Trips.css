@@ -121,11 +121,16 @@ a.instagram:hover{
     .post-content {
         font-size: 12px;
     }
+    .post-content p{
+        font-size: 12px !important;
+    }
 }
+.post-content p{
+        font-size: 14px !important;
+ }
 .post-content{
     width: 80%;
     width: 100%;
-    
     margin-top:20px;
 }
 .post-content img{
