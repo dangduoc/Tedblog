@@ -1,32 +1,27 @@
 ﻿@model MyBlog.Models.SlideImage
 
-@{
-    Layout = null;
+@section CurrentPage{
+    <i class="fa fa-angle-right"></i>
+    <span>Slide ảnh trang chủ</span>
+    <i class="fa fa-angle-right"></i>
+    <span>Xóa ảnh</span>
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
-</head>
-<body>
-    <h3>Are you sure you want to delete this?</h3>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
     <div>
-        <h4>SlideImage</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.url)
+                Đường dẫn
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.url)
+                <img src="@Model.url" style="max-height:700px;"/>
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.title)
+                Tiêu đề
             </dt>
     
             <dd>
@@ -34,7 +29,7 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.date)
+                Ngày tạo
             </dt>
     
             <dd>
@@ -48,9 +43,6 @@
     
             <div class="form-actions no-color">
                 <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
             </div>
         }
     </div>
-</body>
-</html>

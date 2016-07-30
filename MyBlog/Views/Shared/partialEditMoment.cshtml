@@ -22,7 +22,6 @@
                         </div>
                         <form id="form-upload" method="post" action="/Upload/index" style="display:none" enctype="multipart/form-data">
                             <input type="file" name="file" id="file" />
-                            <input class="btn btn-default btn-sm" type="submit" value="Upload" id="upload" />
                             <span id="loading" style="display:none">
                                 Please wait, your photo is loading! <i class='fa fa-spinner' aria-hidden='true'></i>
                             </span>
@@ -49,7 +48,7 @@
                         </style>
                         <script>
                             $(function () {
-                                $(window).load(function(){
+                                $("#editpost").click(function () {
                                     $.ajax({
                                         url: "/Upload/checkToken",
                                         type: "post",
@@ -75,7 +74,6 @@
                                 });
                                 $("#verify-btn").on("click", function () {
                                     var code = $("#verifycode").val();
-                                    alert(code);
                                     if (code == "") {
                                         alert("you need to enter the code!");
                                     }
@@ -86,7 +84,7 @@
                                             type: "post",
                                             success: function (data) {
                                                 if (data == true) {
-                                                    alert("Succeeded! Now you can upload photo");
+                                                    $("#next-upload").hide();
                                                     $("#form-upload").slideDown();
                                                 }
                                                 else {
@@ -96,11 +94,9 @@
                                         })
                                     }
                                 });
-                                $("#form-upload").on("submit", function (e) {
-                                    e.preventDefault();
+                                $("#file").on("change", function (e) {
                                     var data = new FormData();
                                     var files = $("#file").get(0).files;
-
                                     if (files.length > 0) { data.append("HelpSectionImages", files[0]); }
                                     $.ajax({
                                         url: "/Upload/Index",
@@ -173,9 +169,13 @@
                     location.reload();
                 },
                 error: function () {
-                    $("#inform").html("<span style='color:red'>Failed to edit, Something went wrong!</span>");
+                    $("#inform").html("<span style='color:red'>Something went wrong, please try again</span>");
                 }
             });
+        }, function () {
+            $("#content").text("");
+            $("#preview-photo").attr("src", "");
+            $("#Title").text("");
         });
     })
 </script>

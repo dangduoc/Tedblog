@@ -1,17 +1,14 @@
 ﻿@model MyBlog.Models.SlideImage
 
-@{
-    Layout = null;
+@section CurrentPage{
+    <i class="fa fa-angle-right"></i>
+    <span>Slide ảnh trang chủ</span>
+    <i class="fa fa-angle-right"></i>
+    <span>Sửa</span>
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
-</head>
-<body>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -53,9 +50,3 @@
             </div>
         </div>
     }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-</body>
-</html>

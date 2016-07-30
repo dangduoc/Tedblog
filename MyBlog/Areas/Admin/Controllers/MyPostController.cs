@@ -50,7 +50,7 @@ namespace MyBlog.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "postID,postTitle,postContent,dateWrite")] DailyPost dailyPost)
+        public ActionResult Create([Bind(Include = "postID,postTitle,postContent,dateWrite,metaImage")] DailyPost dailyPost)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace MyBlog.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "postID,postTitle,postContent,dateWrite")] DailyPost dailyPost)
+        public ActionResult Edit([Bind(Include = "postID,postTitle,postContent,dateWrite,metaImage")] DailyPost dailyPost)
         {
             if (ModelState.IsValid)
             {
