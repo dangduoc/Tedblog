@@ -1,50 +1,42 @@
 ﻿@model MyBlog.Models.SlideImage
-
-@{
-    Layout = null;
+@section CurrentPage{
+    <i class="fa fa-angle-right"></i>
+    <span>Slide ảnh trang chủ</span>
+    <i class="fa fa-angle-right"></i>
+    <span>Chi tiết</span>
 }
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Đường dẫn
+        </dt>
 
-<!DOCTYPE html>
+        <dd>
+            <img src="@Model.url" style="max-height:700px;" />
+        </dd>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div>
-        <h4>SlideImage</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.url)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.url)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.title)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.title)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.date)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.date)
-            </dd>
-    
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+        <dt>
+            Tiêu đề
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            Ngày tạo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+</p>

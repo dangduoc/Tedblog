@@ -38,7 +38,9 @@
     .img-contact {
         width: 40px;
     }
-
+     #h1-about {
+            font-size: 32px !important;
+        }
     @@media (min-width:768px) {
         #about {
             min-width: 1300px;
@@ -82,22 +84,19 @@
 .recent-post:hover{
 	background-color: rgba(0,0,0,0.5);
 }
-.recent-post div{
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	right: 0;
-	top:0;
-	opacity: 0;
-	background-color: rgba(0,0,0,0.7);
-	transition: opacity 0.7s;
-	-webkit-transition:opacity 0.7s;
-}
 .recent-post div a{
 	color:#fff !important;
+    font-size:11px !important;
 }
-.recent-post:hover div{
-	opacity: 1;
+.recent-post h4{
+    font-size:11px !important;
+    margin-bottom:0px !important;
+}
+.content-slider img{
+    max-height:100px !important;
+}
+.item{
+    margin-bottom:10px !important;
 }
 }
     }
@@ -113,8 +112,9 @@
             <h1 id="h1-about" class="wow slideInRight" data-wow-duration='1s' data-wow-delay='0.5s'>
                 Hi!<br />
                 <small>
-                    This is me, I'm writing this blog mainly to get things out of my head by writing it down.
-                    I also made some sections include funny moments of me and my friends.
+                    This is me, First of all,I want to thank you for visiting my blog.
+                    Secondly, you should know the reason I wrote this blog. I made it to confide, I have no one to talk, so I write things down
+                    This is the first one, so if you see something is not good, please tell me!
                     Hope you'd enjoy it <i class="fa fa-smile-o" aria-hidden="true"></i>
                     <br />
                     <strong>You can contact with me via:</strong>
@@ -150,7 +150,7 @@
         </li>
     </ul>
 </div>
-<div id="myCarousel wow fadeInUp" data-wow-duration='1s' class="carousel slide" data-ride="carousel">
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators" style="bottom: 80px">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -171,7 +171,7 @@
             {
                 k++;
                 <div class="item active">
-                    <img src='@img.url' alt="@img.title" width="1600" height="900">
+                    <img src='@img.url' alt="@img.title">
                     <div class="carousel-caption">
                         <h3>@img.title</h3>
                         <p>@img.date</p>
@@ -181,7 +181,7 @@
             else
             {
                 <div class="item">
-                    <img src='@img.url' alt="@img.title" width="1600" height="900">
+                    <img src='@img.url' alt="@img.title">
                     <div class="carousel-caption">
                         <h3>@img.title</h3>
                         <p>@img.date.Value.ToString("MMMM dd,yyyy")</p>
@@ -275,7 +275,7 @@
     <div class="row">
         <div class="col-sm-3 text-left wow slideInLeft data-wow-duration='2s'" style="color: #fff">
             <h1><i class="fa fa-picture-o" aria-hidden="true"></i><a href="/FriendsandMe/Moments">My Gallery</a></h1>
-            <h2><small>These are <strong>the best moment</strong> I'd taken with people I love. You can find more by click the button bellow</small></h2>
+            <h2><small>There are so many pictures that I'd taken with people I love. You can find more by click the button bellow</small></h2>
             <a class="btn" href="/FriendsandMe/Moments">View more</a>
         </div>
         <div class="col-sm-9  wow slideInRight data-wow-duration='2s'">

@@ -24,6 +24,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="~/Content/admin/css/font-awesome.css" rel="stylesheet" />
     <link href="~/Content/admin/css/custom.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/Admin")
+    <style>
+        .navbar-collapse{
+            max-height:none !important;
+        }
+    </style>
     <script>
         $(function () {
             $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -126,7 +131,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class="name-caret">Chào Được<i class="caret"></i></span><img src="http://i.imgur.com/dehwx7j.jpg"></a>
+                            <a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class="name-caret">Chào Được<i class="caret"></i></span><img style="width:45px" src="http://i.imgur.com/dehwx7j.jpg"></a>
                             <ul class="dropdown-menu " role="menu">
                                 <li><a href="profile.html"><i class="fa fa-user"></i>Edit Profile</a></li>
                                 <li><a href="inbox.html"><i class="fa fa-envelope"></i>Inbox</a></li>

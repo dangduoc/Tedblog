@@ -4,47 +4,48 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
+@section CurrentPage{
+    <i class="fa fa-angle-right"></i>
+    <span>Gallery ảnh trang chủ</span>
+    <i class="fa fa-angle-right"></i>
+    <span>Chi tiết</span>
+}
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
     <div>
-        <h4>GalleryHome</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.url)
+                Đường dẫn
             </dt>
-    
+
             <dd>
-                @Html.DisplayFor(model => model.url)
+                @{
+                    string str = Model.url + "_b.jpg";
+                }
+                <img src="@str" />
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.Title)
+                Tiêu đề
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Title)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.dateCreate)
+                Ngày tạo
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.dateCreate)
             </dd>
-    
+
         </dl>
+
     </div>
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-        @Html.ActionLink("Back to List", "Index")
     </p>
-</body>
-</html>

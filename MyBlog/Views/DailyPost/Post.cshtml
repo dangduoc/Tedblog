@@ -3,14 +3,21 @@
 }
 @model MyBlog.Models.DailyPost
  @{
-            var str = "http://duocdang.azurewebsites.net/DailyPost/Post?id=" + Model.postID;
-       
-        }
+     var str = "http://duocdang.azurewebsites.net/DailyPost/Post?id=" + Model.postID;
+     var img= Model.metaImage;
+     if (String.IsNullOrEmpty(Model.metaImage))
+     {
+         img = Url.Content("~/Content/images/me.jpg");
+     }
+ }
 <link href="~/Content/stylePost.css" rel="stylesheet" />
 <div class="Container" style="padding: 0px; color: black;">
     <div clas="row" style="height: 100vh; width: 100%; overflow: auto">
         <div class="col-sm-5" id="left-post" style="position: relative; overflow: hidden;">
-            <img class="img-responsive" src='@Url.Content("~/Content/images/me.jpg")' />
+            @{ 
+
+            }
+            <img class="img-responsive" src='@img' style="max-width:560px;" />
             <div class="inside-img text-center">
                 <div class="title-post text-center">
                     <h1>@Model.postTitle</h1>
